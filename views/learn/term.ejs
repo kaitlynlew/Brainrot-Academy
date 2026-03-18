@@ -1,0 +1,121 @@
+<%- include('../partials/header') %>
+
+<div class="container term-detail-container">
+
+  <div class="term-breadcrumb">
+    <a href="/learn">← Back to Dictionary</a>
+  </div>
+
+  <div class="term-detail-card">
+    <div class="term-detail-header">
+      <div class="term-title-block">
+        <h1 class="term-detail-word"><%= term.term %></h1>
+        <div class="term-detail-tags">
+          <span class="tag tag-<%= term.category %>"><%= term.category %></span>
+          <span class="tag tag-diff-<%= term.difficulty %>"><%= term.difficulty %></span>
+        </div>
+      </div>
+      <% if (user) { %>
+        <button class="btn <%= isLearned ? 'btn-success' : 'btn-outline' %>" id="learnBtn" data-id="<%= term.id %>">
+          <%= isLearned ? '✅ Learned!' : '📌 Mark as Learned (+10 XP)' %>
+        </button>
+      <% } else { %>
+        <a href="/login" class="btn btn-outline">Login to track progress</a>
+      <% } %>
+    </div>
+
+    <div class="term-detail-body">
+      <div class="detail-section">
+        <h2>Definition</h2>
+        <p class="term-definition"><%= term.definition %></p>
+      </div>
+
+      <% if (term.example_sentence) { %>
+        <div class="detail-section">
+          <h2>Example</h2>
+          <blockquote class="term-example-block">
+            "<%= term.example_sentence %>"
+          </blockquote>
+        </div>
+      <% } %>
+
+      <% if (term.origin) { %>
+        <div class="detail-section">
+          <h2>Origin 🌱</h2>
+          <p><%= term.origin %></p>
+        </div>
+      <% } %>
+
+      <% if (term.media_url && term.media_type === 'youtube') { %>
+        <div class="detail-section">
+          <h2>Video Example 🎥</h2>
+          <div class="video-embed">
+            <iframe src="<%= term.media_url %>" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      <% } else if (term.media_url && term.media_type === 'image') { %>
+        <div class="detail-section">
+          <h2>Example Image 🖼️</h2>
+          <img src="<%= term.media_url %>" alt="<%= term.term %> example" class="term-image">
+        </div>
+      <% } %>
+
+      <!-- TikTok search link -->
+      <div class="detail-section">
+        <h2>See it in the wild 🌐</h2>
+        <div class="external-links">
+          <a href="https://www.tiktok.com/search?q=<%= encodeURIComponent(term.term) %>" target="_blank" rel="noopener" class="ext-link">
+            🎵 Search TikTok
+          </a>
+          <a href="https://www.youtube.com/results?search_query=<%= encodeURIComponent(term.term + ' gen z slang') %>" target="_blank" rel="noopener" class="ext-link">
+            ▶️ Search YouTube
+          </a>
+          <a href="https://www.urbandictionary.com/define.php?term=<%= encodeURIComponent(term.term) %>" target="_blank" rel="noopener" class="ext-link">
+            📖 Urban Dictionary
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Terms -->
+  <% if (related.length > 0) { %>
+    <div class="related-section">
+      <h2>Related Terms</h2>
+      <div class="related-grid">
+        <% related.forEach(r => { %>
+          <a href="/learn/<%= r.id %>" class="related-card">
+            <span class="related-term"><%= r.term %></span>
+            <span class="related-def"><%= r.definition.substring(0, 60) %>...</span>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Quiz CTA -->
+  <div class="learn-cta-bar">
+    <p>Think you got it? Test yourself! 🎯</p>
+    <a href="/quiz" class="btn btn-primary">Take the Quiz</a>
+  </div>
+
+</div>
+
+<script>
+  const learnBtn = document.getElementById('learnBtn');
+  if (learnBtn) {
+    learnBtn.addEventListener('click', async () => {
+      if (learnBtn.classList.contains('btn-success')) return;
+      const resp = await fetch('/learn/<%= term.id %>/mark-learned', { method: 'POST' });
+      const data = await resp.json();
+      if (data.success) {
+        learnBtn.textContent = '✅ Learned!';
+        learnBtn.classList.remove('btn-outline');
+        learnBtn.classList.add('btn-success');
+        showToast(`+10 XP! Total: ${data.xp} XP 🔥`);
+      }
+    });
+  }
+</script>
+
+<%- include('../partials/footer') %>

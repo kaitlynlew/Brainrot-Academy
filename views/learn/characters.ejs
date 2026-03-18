@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+
+<div class="page-header page-header-brainrot">
+  <div class="container">
+    <h1>🍕 Italian Brainrot Characters</h1>
+    <p>The bizarre, AI-generated, Italian-inspired meme universe that broke the internet in 2024</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="learn-subnav">
+    <a href="/learn" class="subnav-link">🗣️ Slang Terms</a>
+    <a href="/learn/characters/brainrot" class="subnav-link active">🍕 Brainrot Characters</a>
+  </div>
+
+  <div class="brainrot-explainer">
+    <h2>What is Italian Brainrot? 🤌</h2>
+    <p>
+      Italian Brainrot is a viral internet trend that exploded on TikTok in 2024. It features AI-generated images and videos of bizarre hybrid creatures with absurd Italian-sounding nonsense names, set to chaotic audio. The content is intentionally surreal, repetitive, and overwhelming — hence "brainrot." Think a crocodile that's also an airplane, or a singing shark in a trench coat.
+    </p>
+    <p>
+      The trend spread globally with creators making their own characters, sounds, and storylines. Characters like <strong>Tralalero Tralala</strong> and <strong>Bombardiro Crocodilo</strong> became iconic meme figures recognized worldwide.
+    </p>
+    <div class="explainer-tags">
+      <span class="tag">AI-generated</span>
+      <span class="tag">TikTok</span>
+      <span class="tag">2024 trend</span>
+      <span class="tag">absurdist humor</span>
+      <span class="tag">viral meme</span>
+    </div>
+  </div>
+
+  <div class="characters-grid">
+    <% characters.forEach((char, i) => { %>
+      <div class="character-card">
+        <div class="character-emoji-box">
+          <% const emojis = ['🦈','🐊','🥁','☕','🪿','🌀']; %>
+          <span class="char-emoji"><%= emojis[i % emojis.length] %></span>
+        </div>
+        <div class="character-info">
+          <h3 class="char-name"><%= char.name %></h3>
+          <p class="char-desc"><%= char.description %></p>
+          <div class="char-origin">
+            <span>🌍 Origin:</span> <%= char.origin %>
+          </div>
+          <div class="char-links">
+            <a href="https://www.tiktok.com/search?q=<%= encodeURIComponent(char.name) %>" target="_blank" rel="noopener" class="ext-link ext-link-sm">
+              🎵 Find on TikTok
+            </a>
+            <a href="https://www.youtube.com/results?search_query=<%= encodeURIComponent(char.name) %>" target="_blank" rel="noopener" class="ext-link ext-link-sm">
+              ▶️ Watch on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="learn-cta-bar">
+    <p>Now test your brainrot knowledge 🎯</p>
+    <a href="/quiz" class="btn btn-primary">Take the Quiz</a>
+    <a href="/learn" class="btn btn-outline">Back to Slang</a>
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>

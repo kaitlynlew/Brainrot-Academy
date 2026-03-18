@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+<div class="error-page">
+  <div class="error-content">
+    <div class="error-code">💀</div>
+    <h1>Server said L</h1>
+    <p><%= typeof message !== 'undefined' ? message : 'Something broke fr fr.' %></p>
+    <a href="/" class="btn btn-primary">Go Home</a>
+  </div>
+</div>
+<%- include('partials/footer') %>

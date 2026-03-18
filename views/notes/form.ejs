@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <div class="container">
+    <h1><%= note ? '✏️ Edit Note' : '📝 New Note' %></h1>
+    <p><%= note ? 'Update your note below' : 'Write something worth remembering, bestie' %></p>
+  </div>
+</div>
+
+<div class="container form-container">
+  <div class="note-form-card">
+
+    <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+    <% } %>
+
+    <form action="<%= note ? `/notes/${note.id}/edit` : '/notes' %>" method="POST" class="note-form">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="e.g. Slang terms I learned today" required maxlength="255"
+               value="<%= note ? note.title : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="8" placeholder="Start writing... no cap this is your space." required><%= note ? note.content : '' %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Note Color</label>
+        <div class="color-picker">
+          <% const colors = [
+            { val: 'yellow', label: '🟡 Yellow' },
+            { val: 'pink', label: '🩷 Pink' },
+            { val: 'green', label: '💚 Green' },
+            { val: 'blue', label: '💙 Blue' },
+            { val: 'purple', label: '💜 Purple' },
+            { val: 'orange', label: '🟠 Orange' }
+          ]; %>
+          <% colors.forEach(c => { %>
+            <label class="color-option color-opt-<%= c.val %>">
+              <input type="radio" name="color" value="<%= c.val %>"
+                     <%= (note ? note.color : 'yellow') === c.val ? 'checked' : '' %>>
+              <span><%= c.label %></span>
+            </label>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <%= note ? 'Save Changes ✅' : 'Create Note ✨' %>
+        </button>
+        <a href="/notes" class="btn btn-ghost">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

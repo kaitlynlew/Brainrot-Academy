@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <div class="container">
+    <h1>🎯 Quiz Time</h1>
+    <p>Test your gen z slang knowledge. Earn XP. Don't be mid.</p>
+  </div>
+</div>
+
+<div class="container quiz-select-container">
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error"><%= error %></div>
+  <% } %>
+
+  <div class="quiz-options">
+    <h2>Choose your difficulty</h2>
+    <div class="difficulty-cards">
+
+      <a href="/quiz/play?difficulty=beginner" class="diff-card diff-beginner">
+        <div class="diff-icon">🌱</div>
+        <h3>Beginner</h3>
+        <p>Basic terms everyone should know. Perfect if you're new to gen z slang.</p>
+        <span class="diff-badge">Easy</span>
+      </a>
+
+      <a href="/quiz/play?difficulty=intermediate" class="diff-card diff-intermediate">
+        <div class="diff-icon">🔥</div>
+        <h3>Intermediate</h3>
+        <p>Deeper cuts. Context-based questions. For those who are kinda lowkey already based.</p>
+        <span class="diff-badge">Medium</span>
+      </a>
+
+      <a href="/quiz/play?difficulty=all" class="diff-card diff-all">
+        <div class="diff-icon">💀</div>
+        <h3>Mixed</h3>
+        <p>All difficulties, random order. The ultimate brainrot test. No cap.</p>
+        <span class="diff-badge">All Levels</span>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="quiz-info-row">
+    <div class="quiz-info-card">
+      <span class="info-icon">📋</span>
+      <h4>How it works</h4>
+      <p>10 multiple-choice questions. Select the best answer for each. Your score is shown at the end.</p>
+    </div>
+    <div class="quiz-info-card">
+      <span class="info-icon">⭐</span>
+      <h4>Earn XP</h4>
+      <p>Logged-in users earn <strong>20 XP</strong> per correct answer. Level up and climb the leaderboard.</p>
+    </div>
+    <div class="quiz-info-card">
+      <span class="info-icon">🏆</span>
+      <h4>Leaderboard</h4>
+      <p>Top scorers by total XP are displayed on the public leaderboard. Can you hit #1?</p>
+    </div>
+  </div>
+
+  <div class="quiz-leaderboard-cta">
+    <a href="/quiz/leaderboard" class="btn btn-outline">🏆 View Leaderboard</a>
+    <% if (!user) { %>
+      <a href="/register" class="btn btn-primary">Join to Save Progress</a>
+    <% } %>
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>

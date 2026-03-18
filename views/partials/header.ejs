@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | Brainrot Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <span class="brand-icon">🧠</span>
+    <span class="brand-text">BRAINROT<br><small>ACADEMY</small></span>
+  </a>
+
+  <div class="nav-links">
+    <a href="/learn" class="nav-link <%= currentPath.startsWith('/learn') ? 'active' : '' %>">
+      📚 Learn
+    </a>
+    <a href="/quiz" class="nav-link <%= currentPath.startsWith('/quiz') ? 'active' : '' %>">
+      🎯 Quiz
+    </a>
+    <% if (user) { %>
+      <a href="/notes" class="nav-link <%= currentPath.startsWith('/notes') ? 'active' : '' %>">
+        📝 Notes
+      </a>
+      <a href="/dashboard" class="nav-link <%= currentPath.startsWith('/dashboard') ? 'active' : '' %>">
+        <%= user.avatar_emoji %> <%= user.username %>
+      </a>
+      <form action="/logout" method="POST" style="display:inline">
+        <button type="submit" class="nav-link btn-logout">Exit →</button>
+      </form>
+    <% } else { %>
+      <a href="/login" class="nav-link <%= currentPath === '/login' ? 'active' : '' %>">Login</a>
+      <a href="/register" class="nav-btn">Join Free</a>
+    <% } %>
+  </div>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">☰</button>
+</nav>
+
+<div class="nav-mobile" id="mobileMenu">
+  <a href="/learn">📚 Learn</a>
+  <a href="/quiz">🎯 Quiz</a>
+  <% if (user) { %>
+    <a href="/notes">📝 Notes</a>
+    <a href="/dashboard"><%= user.avatar_emoji %> Dashboard</a>
+    <form action="/logout" method="POST">
+      <button type="submit">Exit →</button>
+    </form>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/register">Join Free</a>
+  <% } %>
+</div>
+
+<main>

@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <div class="container">
+    <h1>📚 Slang Dictionary</h1>
+    <p>Learn gen z slang, brainrot terms, and internet culture — with real definitions and examples</p>
+  </div>
+</div>
+
+<div class="container learn-container">
+
+  <!-- Filters -->
+  <form action="/learn" method="GET" class="filter-bar">
+    <div class="filter-search">
+      <input type="text" name="search" placeholder="🔍 Search a term..." value="<%= filters.search %>">
+    </div>
+    <div class="filter-selects">
+      <select name="category" onchange="this.form.submit()">
+        <option value="all" <%= filters.category === 'all' ? 'selected' : '' %>>All Categories</option>
+        <% categories.forEach(c => { %>
+          <option value="<%= c %>" <%= filters.category === c ? 'selected' : '' %>><%= c %></option>
+        <% }) %>
+      </select>
+      <select name="difficulty" onchange="this.form.submit()">
+        <option value="all" <%= filters.difficulty === 'all' ? 'selected' : '' %>>All Levels</option>
+        <option value="beginner" <%= filters.difficulty === 'beginner' ? 'selected' : '' %>>Beginner</option>
+        <option value="intermediate" <%= filters.difficulty === 'intermediate' ? 'selected' : '' %>>Intermediate</option>
+      </select>
+      <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      <a href="/learn" class="btn btn-ghost btn-sm">Clear</a>
+    </div>
+  </form>
+
+  <!-- Sub Nav -->
+  <div class="learn-subnav">
+    <a href="/learn" class="subnav-link active">🗣️ Slang Terms (<%= terms.length %>)</a>
+    <a href="/learn/characters/brainrot" class="subnav-link">🍕 Brainrot Characters</a>
+  </div>
+
+  <!-- Terms Grid -->
+  <% if (terms.length === 0) { %>
+    <div class="empty-state">
+      <p>No terms found fr fr 😔 Try a different search.</p>
+      <a href="/learn" class="btn btn-primary">Clear Filters</a>
+    </div>
+  <% } else { %>
+    <div class="terms-grid">
+      <% terms.forEach(term => { %>
+        <a href="/learn/<%= term.id %>" class="term-card <%= learnedIds.includes(term.id) ? 'term-learned' : '' %>">
+          <div class="term-top">
+            <span class="term-word"><%= term.term %></span>
+            <% if (learnedIds.includes(term.id)) { %>
+              <span class="learned-badge">✅ Learned</span>
+            <% } %>
+          </div>
+          <div class="term-meta">
+            <span class="tag tag-<%= term.category %>"><%= term.category %></span>
+            <span class="tag tag-diff-<%= term.difficulty %>"><%= term.difficulty %></span>
+          </div>
+          <p class="term-preview"><%= term.definition.substring(0, 100) %><%= term.definition.length > 100 ? '...' : '' %></p>
+          <div class="term-example">
+            <em>"<%= term.example_sentence %>"</em>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+
+</div>
+
+<%- include('../partials/footer') %>
