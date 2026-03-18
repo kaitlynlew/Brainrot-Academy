@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-  <div class="container quiz-play-container" data-total="<%= questions.length %>">
+  <div class="container quiz-play-container">
 
     <div class="quiz-progress-bar-wrap">
       <div class="quiz-progress-bar" id="progressBar" style="width: 0%"></div>
@@ -74,8 +74,8 @@
   </div>
 
   <script>
-    // Total questions count used for progress/results UI.
-    const totalQ = parseInt(document.querySelector('.quiz-play-container').dataset.total, 10);
+    const questions = <% - JSON.stringify(questions.map(q => ({ correct: q.correct_answer }))) %>;
+    const totalQ = questions.length;
     let currentQ = 0;
     let score = 0;
     const difficulty = '<%= difficulty %>';
