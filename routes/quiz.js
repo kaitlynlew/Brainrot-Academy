@@ -111,8 +111,8 @@ router.get("/leaderboard", async (req, res) => {
   try {
     const result = await db.query(
       `SELECT u.username, u.avatar_emoji, u.xp, u.streak,
-             COUNT(qa.id) as attempts,
-             MAX(qa.score) as best_score
+      COUNT(qa.id) as attempts,
+      MAX(qa.score) as best_score
       FROM users u
       LEFT JOIN quiz_attempts qa ON qa.user_id = u.id
       GROUP BY u.id
