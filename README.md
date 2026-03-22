@@ -197,15 +197,6 @@ Open your browser at **http://localhost:3000** 🎉
 
 ---
 
-## 🎨 Design
-
-- **Aesthetic**: Dark mode, Gen Z chaos energy — bold typography, neon accents, animated elements
-- **Fonts**: Bangers (display) + Space Mono (code) + Nunito (body)
-- **Colors**: Deep dark bg (#0a0a0f), red-pink primary (#ff4d6d), gold accent (#ffd60a)
-- Fully responsive (mobile-first nav with hamburger menu)
-
----
-
 ## 👨‍💻 Development Notes
 
 - Uses EJS partials (`header.ejs`, `footer.ejs`) for DRY templating
