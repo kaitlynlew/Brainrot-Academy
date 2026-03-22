@@ -4,6 +4,17 @@
 
 A full-stack web application for learning Gen Z slang and Italian Brainrot meme culture, built with Node.js, Express.js, EJS, and PostgreSQL.
 
+## 👥 Team & responsibilities
+
+The tasks completed by each team member in the project:
+
+| Team member | Responsibilities |
+|-------------|------------------|
+| Kaitlyn Lew | Backend |
+| Emmalee Dhaliwal | Backend |
+| Jamille Vicente | Frontend |
+| Cuc Vy Trinh | Documentation |
+
 ---
 
 ## 🛠️ Tech Stack
