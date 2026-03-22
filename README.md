@@ -12,7 +12,7 @@ The tasks completed by each team member in the project:
 |-------------|------------------|
 | Kaitlyn Lew | Backend + Deploying Project|
 | Emmalee Dhaliwal | Backend |
-| Jamille Vicente | Frontend |
+| Jamille Vicente | Frontend + Documentation|
 | Cuc Vy Trinh | Documentation |
 
 ---
